@@ -26,6 +26,11 @@ class Device
     #[ORM\JoinColumn(nullable: false)]
     private $deviceType;
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
