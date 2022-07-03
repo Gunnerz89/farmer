@@ -10,6 +10,8 @@
         {{ device.deviceType }}
         <p>
             <a href="{{ path('device_show', {id: device.id}) }}">View</a>
+            <a href="{{ path('device_edit', {id: device.id}) }}">Edit</a>
+            <a href="{{ path('device_delete', {id: device.id}) }}">Delete</a>
         </p>
     {% else %}
         No records

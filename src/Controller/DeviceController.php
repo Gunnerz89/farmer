@@ -45,6 +45,35 @@ class DeviceController extends AbstractController
         ]);
     }
 
+    #[Route('/edit/{id}', name: 'device_edit')]
+    public function edit(Device $device, Request $request, EntityManagerInterface $entityManager): Response
+    {        
+        $form = $this->createForm(DeviceForm::class, $device);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() and $form->isValid()) {
+            $device = $form->getData();
+
+            $entityManager->persist($device);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('device_index');
+        }
+
+        return $this->renderForm('device/edit.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/delete/{id}', name: 'device_delete')]
+    public function delete(Device $device, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($device);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('device_index');
+    }
+
     #[Route('/show/{id}', name: 'device_show')]
     public function show(Device $device): Response
     {
