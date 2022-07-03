@@ -87,7 +87,10 @@
             "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "rm -rf public/bootstrap/*",
+            "mkdir -p public/bootstrap/",
+            "cp -r vendor/twbs/bootstrap/dist/* public/bootstrap"
         ]
     },
     "conflict": {

@@ -4,19 +4,19 @@
 
 {% block body %}
 
-<div>
     {% for device in devices %}
-        <h4>{{ device }}</h4>
-        {{ device.deviceType }}
-        {{ device.producer }}
-        <p>
-            <a href="{{ path('device_show', {id: device.id}) }}">View</a>
-            <a href="{{ path('device_edit', {id: device.id}) }}">Edit</a>
-            <a href="{{ path('device_delete', {id: device.id}) }}">Delete</a>
-        </p>
+        <div class="card">
+            <h4>{{ device }}</h4>
+            {{ device.deviceType }}
+            {{ device.producer }}
+            <p>
+                <a role="button" class="btn btn-secondary" href="{{ path('device_show', {id: device.id}) }}">View</a>
+                <a role="button" class="btn btn-secondary" href="{{ path('device_edit', {id: device.id}) }}">Edit</a>
+                <a role="button" class="btn btn-warning" href="{{ path('device_delete', {id: device.id}) }}">Delete</a>
+            </p>
+        </div>
     {% else %}
         No records
     {% endfor %}
-    <a href="{{ path('device_new') }}">New device</a>
-</div>
+    <a class="btn btn-primary" role="button" href="{{ path('device_new') }}">New device</a>
 {% endblock %}
