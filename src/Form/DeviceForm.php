@@ -7,6 +7,8 @@ use App\Entity\DeviceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,8 +20,9 @@ class DeviceForm extends AbstractType
             ->add('name')
             ->add('deviceType', EntityType::class, [
                 'class' => DeviceType::class,
-                
             ])
+            ->add('description', TextareaType::class)
+            ->add('producer', TextType::class)
             ->add('save', SubmitType::class)
         ;
     }   

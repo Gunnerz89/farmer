@@ -8,6 +8,7 @@
     {% for device in devices %}
         <h4>{{ device }}</h4>
         {{ device.deviceType }}
+        {{ device.producer }}
         <p>
             <a href="{{ path('device_show', {id: device.id}) }}">View</a>
             <a href="{{ path('device_edit', {id: device.id}) }}">Edit</a>

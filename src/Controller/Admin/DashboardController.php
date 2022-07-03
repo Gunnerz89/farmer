@@ -31,7 +31,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'index');
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'device_index');
         yield MenuItem::linkToCrud('Devices', 'fas fa-map-marker-alt', Device::class);
         yield MenuItem::linkToCrud('Device types', 'fas fa-comments', DeviceType::class);
     }
