@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Device{% endblock %}
+
+{% block body %}
+
+<div>
+    {% for device in devices %}
+        <h4>{{ device }}</h4>
+        {{ device.deviceType }}
+        <p>
+            <a href="{{ path('device_show', {id: device.id}) }}">View</a>
+        </p>
+    {% else %}
+        No records
+    {% endfor %}
+    <a href="{{ path('device_new') }}">New device</a>
+</div>
+{% endblock %}
