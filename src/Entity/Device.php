@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DeviceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DeviceRepository::class)]
@@ -25,6 +27,14 @@ class Device
     #[ORM\ManyToOne(targetEntity: DeviceType::class, inversedBy: 'devices')]
     #[ORM\JoinColumn(nullable: false)]
     private $deviceType;
+
+    #[ORM\ManyToMany(targetEntity: MeasurementType::class, inversedBy: 'devices')]
+    private $measurementTypes;
+
+    public function __construct()
+    {
+        $this->measurementTypes = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -80,6 +90,30 @@ class Device
     public function setDeviceType(?DeviceType $deviceType): self
     {
         $this->deviceType = $deviceType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MeasurementType>
+     */
+    public function getMeasurementTypes(): Collection
+    {
+        return $this->measurementTypes;
+    }
+
+    public function addMeasurementType(MeasurementType $measurementType): self
+    {
+        if (!$this->measurementTypes->contains($measurementType)) {
+            $this->measurementTypes[] = $measurementType;
+        }
+
+        return $this;
+    }
+
+    public function removeMeasurementType(MeasurementType $measurementType): self
+    {
+        $this->measurementTypes->removeElement($measurementType);
 
         return $this;
     }
